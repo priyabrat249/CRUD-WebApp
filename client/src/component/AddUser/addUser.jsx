@@ -1,6 +1,9 @@
 import { FormGroup,FormControl ,InputLabel,Input,Typography,styled,Button} from "@mui/material";
 import { useState } from "react";
 import { addUser } from "../../api";
+import Header from '../Header/header';
+// import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Container = styled(FormGroup)`
     width: 50%;
@@ -18,19 +21,23 @@ const defaultvalue = {
 }
 
 const AddUser = () => {
+    
     const [user,setUser]= useState(defaultvalue);
     const onChangeValue = (e)=> {
-        // console.log(e.target.name, e.target.value);
-        setUser({ ...user, [e.target.name]: e.target.value });
-        // console.log(user);
+        user[e.target.name] = e.target.value;
+        setUser(user)
+        //  console.log(user);
     }
-    const addUsersDetails = async() => {
+
+    const addUsersDetails = async () => {
+        console.log(user);
         await addUser(user);
-    //    console.log(user);
     }
     return (
+        <>
+        <Header/>
         <Container>
-            <Typography variant='h4'>
+            <Typography variant='h4' align='center'>
                     AddUser
             </Typography>
             <FormControl>
@@ -54,7 +61,7 @@ const AddUser = () => {
                 <Button variant="contained" onClick={()=>addUsersDetails()}>Add User</Button>
             </FormControl>
         </Container>
-        
+        </>
     )
 }
 

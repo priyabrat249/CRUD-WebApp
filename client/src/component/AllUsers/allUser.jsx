@@ -1,8 +1,9 @@
 import { useEffect,useState } from 'react';
 import { TableHead, TableBody, TableRow, Table, TableCell,Button ,styled} from '@mui/material';
-import {getUser,deleteUser} from '../../api/index.js'
+import {getUsers,deleteUser} from '../../api/index.js'
 import  EditUser  from '../EditUser/editUser.jsx'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import Header from '../Header/header.jsx'
 const StyledTable = styled(Table)`
     width:90%;
     margin:50px auto 0 auto
@@ -30,13 +31,15 @@ const AllUser = () => {
         getUsersDetails();
     },[])
     const getUsersDetails = async() => {
-        let response = await getUser();
+        let response = await getUsers();
         setUsers(response.data);
         
 
     }
-    const deleteUserDetails = async(id) => {
+    const deleteUserDetails = async (id) => {
+        console.log(id);
         await deleteUser(id);
+        getUsersDetails();
         
         
 
@@ -47,6 +50,8 @@ const AllUser = () => {
     }
     console.log(users);
     return (
+        <>
+            <Header/>
         <StyledTable>
             <TableHead>
                 <HTable>
@@ -76,7 +81,8 @@ const AllUser = () => {
                     ))
                 }
             </TableBody>
-        </StyledTable>
+            </StyledTable>
+        </>
     )
 }
 

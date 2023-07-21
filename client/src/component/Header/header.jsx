@@ -16,7 +16,6 @@ const Top = () => {
     return (
         <Header position="static">
             <Toolbar >
-                <Tab to='/'>DataBase</Tab>
                 <Tab to='/All'>All Users</Tab>
                 <Tab to='/Add'>Add User</Tab>
             </Toolbar>
